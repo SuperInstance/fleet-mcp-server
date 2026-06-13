@@ -59,11 +59,14 @@ node dist/index.js
 
 This server is a stateless adapter in the SuperInstance fleet stack. It sits between MCP-compatible AI agents and the fleet-vector-api Cloudflare Worker. It contributes to the **γ + η = C** conservation law by reducing coordination overhead (γ): agents don't need custom API integration code, shrinking the glue layer. The fleet-vector-api itself uses Cloudflare Vectorize for ANN search. See the [Architecture document](https://github.com/SuperInstance/SuperInstance/blob/main/ARCHITECTURE.md) for fleet topology.
 
+**Transport**: The server uses `StdioServerTransport`, reading JSON-RPC messages from stdin and writing responses to stdout. This is the standard MCP transport for local integrations — no network socket needed, no port conflicts. The server process is spawned by the client (e.g., Claude Desktop) and communicates via pipes.
+
 ## References
 
 - Model Context Protocol Specification, Anthropic (2024). https://modelcontextprotocol.io/specification
 - BGE-small-en-v1.5 embedding model: Xiao et al., "C-Pack: Packaged Resources To Advance General Chinese Embedding," SIGIR 2024.
 - Cloudflare Vectorize Documentation. https://developers.cloudflare.com/vectorize/
+- Zod Schema Validation: https://zod.dev
 
 ## License
 
